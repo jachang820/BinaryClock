@@ -2,6 +2,8 @@
 
 This was originally a project for Idea Hacks 2018 at UCLA, to be run on a Beaglebone Black and a 3D printed clock, but we didn't finish in time. So here's a software version.
 
+![Screenshot](https://github.com/jachang820/BinaryClock/blob/master/Screenshot-2018-1-14.png)
+
 ## Getting Started
 
 The binary clock runs on a Django backend with sqlite3 database, since it was intended to be mostly single-user in a consumer electronic device. It allows the user to log into their Google account to pull the next 10 events. 
@@ -13,6 +15,10 @@ For privacy issues, I deleted the client secrets file and the database. The foll
 * [Goole API Key](https://console.developers.google.com/apis/credentials?project=binary-clock-192007) is necessary to access the Google API in order to import events from the Google Calendar. Follow the link and click *Create credentials*, then *OAuth client ID* and follow all the steps. At the end of the process, download the JSON file to the static folder.
 * At the same site, go to *Library* and search for the *Google Calendar API*, and enable it.
 * Update the CLIENT_SECRET_FILE in *binaryclock/views.py* (line 9) to the downloaded JSON file.
+* Add the following name-value pair to the JSON file right before "javascript-origins" (last entry):
+```
+"redirect_uris":"http://localhost:8000/clock/"
+```
 * Using a cmd interface, go to the root directory and migrate the sqlite3 database.
 ```
 python manage.py makemigrations binaryclock

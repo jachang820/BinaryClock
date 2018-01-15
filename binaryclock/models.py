@@ -16,9 +16,9 @@ class User(models.Model):
 class Event(models.Model):
 	eid = models.CharField(primary_key=True, max_length=32)
 	start_time = models.DateTimeField('start.dateTime')
-	start_zone = models.CharField('start.timeZone',max_length=32)
+	start_zone = models.CharField('start.timeZone',max_length=32,blank=True,null=True)
 	end_time = models.DateTimeField('end.dateTime')
-	end_zone = models.CharField('end.timeZone',max_length=32)
+	end_zone = models.CharField('end.timeZone',max_length=32,blank=True,null=True)
 	summary = models.TextField('summary')
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 

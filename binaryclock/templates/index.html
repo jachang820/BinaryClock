@@ -29,7 +29,13 @@
 	<div class="container">
 		<div id="left-side">
 			<div id="signin-panel" class="panel">
-				<div>Welcome, {{ email }}!</div>
+				<div>
+					{% if email %}
+						Welcome, {{ email }}!
+					{% else %}
+						Sync Calendar events by logging in!
+					{% endif %}
+				</div>
 				<div id="signinButton"><div id="signinLogo"></div><div id="signinText">Sign in with Google</div></div>
 			</div>
 			<div id="test"></div>
@@ -136,6 +142,8 @@
 		    mode: 'cors',
 		    cache: 'default',
 			});
+
+			location.reload();
 
 	  } else {
 	    alert('Error: Cannot connect to server.');

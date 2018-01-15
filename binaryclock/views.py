@@ -6,13 +6,14 @@ import json
 from .models import User, Event
 from binaryclock.auth import *
 
-CLIENT_SECRET_FILE = 'binaryclock/static/client_secret_file.json'
+CLIENT_SECRET_FILE = 'binaryclock/static/client_secret_519490395897-tvp2ffap7lrme2lev0nmc5ug2br7njd9.apps.googleusercontent.com.json'
 
 
 def index(request):
 	# Pass data to view
+	user = User.objects.filter(logged_in=True)
 	context = {
-		'email': User.objects.filter(logged_in=True)[0].email,
+		'email': user[0].email if user else "",
 		'events_list': Event.objects.filter(user__logged_in=True).order_by('start_time')
 	}
 
