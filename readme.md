@@ -10,7 +10,7 @@ The binary clock runs on a Django backend with sqlite3 database, since it was in
 
 ### Prerequisites
 
-I have resetted by client secrets file. To run this on your own server, you need to do the following:
+I have resetted my client secrets file. To run this on your own server, you need to do the following:
 
 * [Goole API Key](https://console.developers.google.com/apis/credentials?project=binary-clock-192007) is necessary to access the Google API in order to import events from the Google Calendar. Follow the link and click *Create credentials*, then *OAuth client ID* and follow all the steps. At the end of the process, download the JSON file to the static folder.
 * At the same site, go to *Library* and search for the *Google Calendar API*, and enable it.
