@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+  <link rel="stylesheet" href="{% static 'clock/styles.css' %}">
+	<meta charset="UTF-8">
+	<title>Binary Clock</title>
+	<meta name="google-signin-client_id" content="519490395897-tvp2ffap7lrme2lev0nmc5ug2br7njd9.apps.googleusercontent.com">
+	<script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '519490395897-tvp2ffap7lrme2lev0nmc5ug2br7njd9.apps.googleusercontent.com',
+          scope: 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+        });
+      });
+    }
+  </script>
+
+</head>
+<body>
+	<h1>BINARY CLOCK</h1>
+	
+	<div class="container">
+		<div id="left-side">
+			<div id="signin-panel" class="panel">
+				<div>Welcome, {{ email }}!</div>
+				<div id="signinButton"><div id="signinLogo"></div><div id="signinText">Sign in with Google</div></div>
+			</div>
+			<div id="test"></div>
+			<script>
+				$('#signinButton').click( function() {
+					auth2.grantOfflineAccess({prompt: 'consent'}).then(signInCallback);
+				});
+			</script>
+			<div id="clock-panel" class="panel">
+				<table>
+					<tr>
+						<td colspan="2">Hour :</td>
+						<td colspan="2">Minute :</td>
+						<td colspan="2">Second</td>
+					</tr>
+					<tr id="row1">
+						<td></td>
+						<td><div id="clock_2" class="led"></div></td>
+						<td></td>
+						<td><div id="clock_9" class="led"></div></td>
+						<td></td>
+						<td><div id="clock_16" class="led"></div></td>
+					</tr>
+					<tr id="row2">
+						<td></td>
+						<td><div id="clock_3" class="led"></div></td>
+						<td><div id="clock_6" class="led"></div></td>
+						<td><div id="clock_10" class="led"></div></td>
+						<td><div id="clock_13" class="led"></div></td>
+						<td><div id="clock_17" class="led"></div></td>
+					</tr>
+					<tr id="row3">
+						<td><div id="clock_0" class="led"></div></td>
+						<td><div id="clock_4" class="led"></div></td>
+						<td><div id="clock_7" class="led"></div></td>
+						<td><div id="clock_11" class="led"></div></td>
+						<td><div id="clock_14" class="led"></div></td>
+						<td><div id="clock_18" class="led"></div></td>
+					</tr>
+					<tr id="row4">
+						<td><div id="clock_1" class="led"></div></td>
+						<td><div id="clock_5" class="led"></div></td>
+						<td><div id="clock_8" class="led"></div></td>
+						<td><div id="clock_12" class="led"></div></td>
+						<td><div id="clock_15" class="led"></div></td>
+						<td><div id="clock_19" class="led"></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="right-side">
+			<div id="events-panel" class="panel">
+				{% if events_list %}
+					<ul>
+					{% for event in events_list %}
+						<div class="event-header">
+							{{ event.summary }}
+						</div>
+						<div class="event-time">
+							FROM {{ event.start_time|date:'H:i' }} TO {{ event.end_time|date:'H:i' }}
+						</div>
+					{% endfor %}
+					</ul>
+				{% else %}
+					<p>No events are available.</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<script>
+	function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+	}
+	
+	function csrfSafeMethod(method) {
+	    // these HTTP methods do not require CSRF protection
+	    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+
+	function signInCallback(authResult) {
+	  if (authResult['code']) {
+
+	  	fetch('storeauthcode/', {
+		    method: 'POST',
+		    body: JSON.stringify( {'code' : authResult['code']} ),
+		    headers: {
+		    	"X-CSRFToken": getCookie("csrftoken"),
+	        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+		    },
+		    credentials: 'same-origin',
+		    mode: 'cors',
+		    cache: 'default',
+			});
+
+	  } else {
+	    alert('Error: Cannot connect to server.');
+	  }
+
+	}
+	</script>
+	<script src="{% static 'clock/clock.js' %}"></script>
+</body>
+
+</html>

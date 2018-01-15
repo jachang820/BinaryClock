@@ -1,0 +1,160 @@
+html, body {
+	margin: 0;
+	height: 100%;
+}
+
+.container {
+ height: 80%;
+ margin: 0;
+ padding: 0;
+}
+
+#left-side {
+	display: inline-block;
+	min-width: 40%;
+	max-width: 40%;
+	height: 100%;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#right-side {
+	display: inline-block;
+	min-width: 50%;
+	max-width: 60%;
+	min-height: 60%;
+	max-height: 100%;
+	vertical-align: top;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+h1 {
+	font-family: 'Roboto Medium', sans-serif;
+	color: black;
+	opacity: 0.7;
+	font-size: 20vh;
+	margin: 0px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.panel {
+	font-family: 'Roboto Medium', sans-serif;
+	border-radius: 8px;
+	margin: 10px;
+	padding: 2%;
+	width: 90%;
+	min-height: 15vh;
+	display: inline-block;
+	background: #EEEEEE;
+	border: 2px dashed #444444;
+	text-align: center;
+	vertical-align: top;
+	float: left;
+}
+
+#signin-panel {
+	min-height: 16vh;
+}
+
+#clock-panel {
+	height: 42vh;
+}
+
+#events-panel {
+	min-height: 65vh;
+}
+
+#signinButton, #signinButton:hover {
+	width: 200px;
+	height: 50px;
+	background: #4285F4;
+	display: inline-block;
+	border-radius: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 1em auto;
+	cursor: pointer;
+}
+
+#signinButton:hover {
+	background: #2265D4;
+}
+
+#signinButton:active {
+	border-right: 2px solid #555555;
+	border-bottom: 3px solid #888888;
+}
+
+#signinLogo, #signinLogo:hover {
+	height: 46px;
+	width: 46px;
+	background-size: cover;
+	text-align: left;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#signinLogo {
+	background: url("/static/clock/btn_google_dark_normal_ios.svg");
+}
+
+#signinLogo:hover {
+	background: url("/static/clock/btn_google_dark_focus_ios.svg");
+}
+
+#signinText {
+	font-family: 'Roboto Medium', sans-serif;
+	font-size: 14px;
+	width: 70%;
+	height: 100%;
+	text-align: right;
+	vertical-align: middle;
+	display: inline-block;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+
+table {
+	display: inline-block;
+	text-align: center;
+	margin: 5vh;
+}
+
+.led {
+	height: 20px;
+	width: 20px;
+	border-radius: 12px;
+	border: 2px solid black;
+	background: #004080 url("/static/clock/orb.png");
+}
+
+.led.active {
+	background-color: #99CCFF;
+}
+
+.event-header {
+	width: 80%;
+	background: #666666;
+	color: #EEDDDD;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+	border: 1px solid black;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	margin-left: 5%;
+}
+
+.event-time {
+	width: 80%;
+	border: 1px solid black;
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-left: 5%;
+
+}
